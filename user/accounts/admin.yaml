@@ -1,0 +1,11 @@
+email: fangyuncn@163.com
+fullname: 'Fang Yun'
+title: Administrator
+state: enabled
+access:
+  admin:
+    login: true
+    super: true
+  site:
+    login: true
+hashed_password: $2y$10$OTbJmxkJd7.dL4FBX8cULOuDJeuixEqBRnmaG1hbq9WM2gWXf6Tji

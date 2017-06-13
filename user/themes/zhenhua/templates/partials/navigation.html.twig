@@ -1,0 +1,38 @@
+{% macro loop(page) %}
+    {% for p in page.children.visible %}
+        {% if p.children.visible.count > 0 %}
+            <li class="dropdown">
+                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                    {{ p.menu }}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
+                    {{ _self.loop(p) }}
+                </ul>
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ p.url }}">
+                    {{ p.menu }}
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+<nav class="navbar navbar-default navbar-header-full navbar-dark yamm navbar-static-top" role="navigation" id="header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa fa-bars"></i>
+            </button>
+            <a id="ar-brand" class="navbar-brand hidden-lg hidden-md hidden-sm" href="index.html">振华学校</a>
+        </div> <!-- navbar-header -->
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                {{ _self.loop(pages) }}                                             
+             </ul>
+        </div>
+    </div>
+</nav>

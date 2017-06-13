@@ -1,0 +1,63 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+<header class="main-header">
+    <div class="container">
+        <h1 class="page-title">{{ header.title }}</h1>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 hidden-sm hidden-xs">
+            <div class="portfolio-menu">
+                <h3><i class="fa fa-desktop"></i>{{ page.parent.header.title }}</h3>
+                <ul class="portfolio-cats">
+                	{% for item in page.parent.children %}
+                		{% if item.header.title==page.header.title %}
+                			<li><span class="filter active">{{ item.header.title }}</span></li>
+                		{% else %}
+                			<li><span class="filter" onclick="location='{{ item.url}}'">{{ item.header.title }}</span></li>
+                		{% endif %}
+                	{% endfor %}
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <article class="post">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="{{ header.content.text_class }} post-content">
+                             {% block post %}
+                             {{ content }}
+                             {% endblock %}   		
+                            </div>
+                            
+                            {% if header.content.images and header.content.images|length==1 %}
+                            	<div class="{{ header.content.img_class ?:'col-lg-6'}}">
+                                	<img src="{{url(header.content.images[0])}}" class="img-post img-responsive" alt="Image">
+                                </div>                            
+                            {% endif %}                                  
+                        </div>
+                        {% if header.content.images and (header.content.images|length)>1 %}
+                            {% for i in 0..(header.content.images|length)/2-1  %}
+                                <div class="row">
+                                	<div class="{{ header.content.img_class ?:'col-lg-6'}}">
+    									<img src="{{url(header.content.images[2*i])}}" class="img-post img-responsive" alt="Image">
+    								</div>
+                                	<div class="{{ header.content.img_class ?:'col-lg-6'}}">
+    									<img src="{{url(header.content.images[2*i+1])}}" class="img-post img-responsive" alt="Image">
+    								</div>	                            
+                                </div>                    
+                            {% endfor %}
+						{% endif %}                        
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>
+{% endblock %}

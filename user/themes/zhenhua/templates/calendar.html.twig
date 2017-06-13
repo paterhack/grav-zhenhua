@@ -1,0 +1,59 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+<header class="main-header">
+    <div class="container">
+        <h1 class="page-title">{{ header.title }}</h1>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 hidden-sm hidden-xs">
+            <div class="portfolio-menu">
+                <h3><i class="fa fa-desktop"></i>{{ page.parent.header.title }}</h3>
+                <ul class="portfolio-cats">
+                	{% for item in page.parent.children %}
+                		{% if item.header.title==page.header.title %}
+                			<li><span class="filter active">{{ item.header.title }}</span></li>
+                		{% else %}
+                			<li><span class="filter" onclick="location='{{ item.url}}'">{{ item.header.title }}</span></li>
+                		{% endif %}
+                	{% endfor %}
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <article class="post">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-9 post-content">
+                    			<ul class="timeline-2">
+                    				{% for item in page.children %}
+                                        <li class="animated fadeInRight animation-delay-{{ loop.revindex }}">
+                                            <time class="timeline-time" datetime="">{{ item.header.content.time }} <span>{{ item.header.content.month }}</span></time>
+                                            <i class="timeline-2-point"></i>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                {% if item.header.pending %}
+                                                	{{ item.header.title }}
+                                                {% else %}
+                                                	<a href="{{item.url }}">{{ item.header.title }}</a>
+                                                {% endif %}
+                                                </div>
+                                            </div>
+                                        </li>                    					
+                    				{% endfor %}
+                                </ul>   		
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>
+{% endblock %}
