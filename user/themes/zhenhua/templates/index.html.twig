@@ -2,7 +2,7 @@
 
 {% block content %}
 <section class="carousel-section">
-    <div id="carousel-example-generic" class="carousel carousel-razon slide" data-ride="carousel" data-interval="5000">
+    <div id="carousel-example-generic" class="carousel carousel-razon slide" data-ride="carousel" data-interval="5000" style="height:400px; overflow:auto">
         <ol class="carousel-indicators">
         	{% for i in 0..((header.content.carousels|length)-1) %}
         		{% if i==0 %}
